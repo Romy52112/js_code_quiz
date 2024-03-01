@@ -9,13 +9,13 @@
 <body>
     <header class = "header">
         <div id="score">View high scores</div>
-        <div class="time">Time Left: <span id="time">60</span></div>
+        <div class="timer">Time Left: <span id="time">60</span></div>
     </header>
     <h1>JAVASCRIPT FUNDAMENTALS QUIZ</h1>
-        <div class="first_part" id="invi">Try to answer this 10 questions about Javascript. 
-            <div class="controls">
+        <div class="first_part" id="invi">Try to answer these 10 questions about Javascript. 
+            <div id="controls">
                 <button id="start_quiz">Start Quiz</button>
-            </div> 
+            </div>
         </div>
     <main>
         <section id="question_container" class="hide">
@@ -26,9 +26,14 @@
                 <button class="btn">Answer 1</button>
                 <button class="btn">Answer 1</button>
             </div>
-        </section>
-        <div class="hide" id="retry">
-            <button>Retry</button>
+            <div id="wrongCorrect"></div>
+        </section>       
+        <div id="end-game">
+            <h2 clas="done ">All done!!!</h2>
+             <div id="last-part">  
+                <button class="end-btn  ">Retry</button>
+                <button id="quit" class="end-btn  ">Quit</button>
+            </div>
         </div>
     </main>    
    <script src="./assets/script.js"></script> 

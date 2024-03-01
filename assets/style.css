@@ -26,6 +26,7 @@ body.wrong{
     margin-right: 30px;
 }
 
+
 h1 {
     font-size: 60px;
     border-bottom: 5px solid blue;
@@ -50,16 +51,25 @@ h1 {
     background-color: white;
 }
    
-.controls{
+#controls{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: rgb(255, 250, 199);
 }
 .hide{
     display:none;
 } 
-    
+#end-game{
+    display:none;
+}
+#wrongCorrect{
+    font-size: 30px;
+    justify-content: space-between;
+    display: flex;
+
+}
+
 .btn {
     font-size: 20px;
     color: rgb(255, 255, 255);
@@ -102,11 +112,32 @@ h1 {
  }
 
 
-#retry:hover {
+ .end-btn {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(21, 21, 21);
+    border-radius: 5px;
     cursor: pointer;
-    background: var(--alt_background);
-    transform: scale(1.05);
-    transition: 0.5s;
+    display: inline-block;
+    margin: 10px;
+    width: 25%;
+    justify-content: center;
+    padding: 20px;
+}
+.end-btn:hover{
+    background-color: rgb(252, 117, 117);
+    transform: scale(.9);
+    transition: 0.3s;
     letter-spacing: 0.25em;
-    box-shadow: 0 0 25px var(--alt_background);;
+}
+#last-part{
+    display:flex;
+    justify-content: center;
+}
+.done{
+    font-size: 80px;
+    border-bottom: 5px solid blue;
+    text-align: center;
+    padding: 20px;
+    
 }
