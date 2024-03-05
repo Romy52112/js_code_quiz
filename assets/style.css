@@ -11,12 +11,18 @@
     --body_wrong: red;
 }
 
-body.correct{
+/* body.correct{
     background-color: var(--body_correct);
 }
 body.wrong{
     background-color: var(--body_wrong);
+} */
+#wrongCorrect{
+    font-size: 50px;
+    font-style: italic;
+    color: rgb(97, 97, 97);
 }
+
 .header{
     font-size: 30px;
     justify-content: space-between;
@@ -34,12 +40,21 @@ h1 {
     padding: 20px;
     
 }
-#invi{
+#invi, #yourScore, #highscoreContainer{
     text-align: center;
     font-size: 30px;
     font-weight: bold;
     padding: 20px;
     margin-top: 20px;
+}
+#text, #submit{
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    text-align: center;
+    padding: 20px;
+    
+
 }
 #question{
     font-size: 30px;
@@ -60,16 +75,6 @@ h1 {
 .hide{
     display:none;
 } 
-#end-game{
-    display:none;
-}
-#wrongCorrect{
-    font-size: 30px;
-    justify-content: space-between;
-    display: flex;
-
-}
-
 .btn {
     font-size: 20px;
     color: rgb(255, 255, 255);
@@ -95,7 +100,7 @@ h1 {
     color: white;
     width: 25%;
     height: 100px; 
-    font-size: 20px;
+    font-size: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,11 +109,10 @@ h1 {
  }
  #start_quiz:hover{
      cursor: pointer;
-     background: var(--alt_background);;
+     background: var(--alt_background);
      transform: scale(1.05);
      transition: 0.5s;
-     letter-spacing: 0.25em;
-     box-shadow: 0 0 25px var(--alt_background);;
+     box-shadow: 0 0 25px var(--alt_background);
  }
 
 
@@ -139,5 +143,4 @@ h1 {
     border-bottom: 5px solid blue;
     text-align: center;
     padding: 20px;
-    
-}
+}   

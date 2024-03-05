@@ -1,22 +1,32 @@
 var questionSet = document.getElementById('question_container');
 var startButton = document.getElementById("start_quiz");
-var nextButton = document.getElementById("next_btn");
 var quizQuestion = document.getElementById('question');
 var quizAnswer = document.getElementById('answer');
 var first_part = document.getElementById('invi')
 var answerButton = document.getElementsByClassName('btn')
 var timeLeft = document.getElementById('time')
+var timeText = document.getElementsByClassName('timer')
 var quitBtn = document.getElementById('quit')
-var end = document.getElementById('end-game')
+var retryButton = document.getElementById('retry')
+var endGame = document.getElementById('end-game')
 var wrongCorrect = document.getElementById('wrongCorrect')
+var main = document.getElementById('main_container')
+var title = document.getElementById('title')
+var header = document.getElementById('head')
+var finalScore = document.getElementById('finalScore')
+var submit = document.getElementById('submit')
+var highscoreContainer = document.getElementById('highscoreContainer')
 
-var score= 0;
+
+
+var score =0;
 var timeRemaining;
 var shuffledQuestions
-var currentQuestionIndex
+var currentQuestionIndex 
 
 // this is for the start button.
 startButton.addEventListener('click', startQuiz);
+  
 // once you click any of the answer the next question appear.
 quizAnswer.addEventListener('click', ()=>{
       currentQuestionIndex++
@@ -25,21 +35,21 @@ quizAnswer.addEventListener('click', ()=>{
  })
 
 function startQuiz() {
+    score = 0;
+    finalScore.textContent = score
     first_part.classList.add('hide')
     shuffledQuestions = questionList.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
-    timeRemaining = 60;
+    timeRemaining = 10;
     questionSet.classList.remove('hide')
     nextQuestion(); 
     var interval = setInterval(function(){
-    
-        timeRemaining--;
-        timeLeft.textContent = timeRemaining;
-        if(timeRemaining === 0){
-            clearInterval(interval)
-        }
-        
-    }, 1000);
+    timeRemaining--;
+    timeLeft.textContent = timeRemaining;
+    if(timeRemaining === 0){
+    clearInterval(interval)
+    lastPart()
+    }}, 1000);
 }
 
 
@@ -52,21 +62,21 @@ function startQuiz() {
 function showQuestion(question){
     quizQuestion.innerText = question?.questions
     question?.answers.forEach(answers =>{
-      const button = document.createElement('button')
-      button.innerText = answers.text
-      button.classList.add('btn')
-      if (answers.correct){
-       button.dataset.correct =answers.correct
+    const button = document.createElement('button')
+    button.innerText = answers.text
+    button.classList.add('btn')
+    if (answers.correct){
+    button.dataset.correct =answers.correct
     } 
    button.addEventListener('click', selectAnswers)  
    quizAnswer.appendChild(button)
-     })
+    })
 }
 
 function resetQuestion(){
     clearStatusClass(document.body)
     while (quizAnswer.firstChild){
-        quizAnswer.removeChild(quizAnswer.firstChild)
+    quizAnswer.removeChild(quizAnswer.firstChild)
     }
 
 }
@@ -74,35 +84,60 @@ function resetQuestion(){
     var selectedAnswer = answer.target //getting users answer
     var correctAnswer = selectedAnswer.dataset.correct //getting the correct answer
     setStatusClass(document.body, correctAnswer)
-    Array.from(quizAnswer.children).forEach(button =>{
-        setStatusClass(button, button.dataset.correct)
-    })
     if(shuffledQuestions.length > currentQuestionIndex+1){
-          
-        }
-        else{questionSet.classList.add('hide') 
+    }else
+    {questionSet.classList.add('hide')
     }
- 
+   
 }
-// this is to check if the answer is correct or wrong and for the borderline of green and red
 
-function setStatusClass(element, correct) {
-    clearStatusClass(element)
+
+function setStatusClass(body, correct) {
+    clearStatusClass(body)
     if (correct) {
-      element.classList.add('correct')
-      wrongCorrect.innerText = "WRONG!!!!"
-    } else {
-      element.classList.add('wrong')
-      wrongCorrect.innerText = "CORRECT!!!!"
+      body.classList.add('correct')
+      body.classList.remove('wrong')
+      wrongCorrect.textContent = "YOU'RE CORRECT!!!!"
+      score = score +1;
+
       
+    } else {
+      body.classList.add('wrong')
+      body.classList.remove('correct')
+      wrongCorrect.textContent = "YOU'RE WRONG!!!!";
+      timeRemaining = timeRemaining -5;
     }
+  } 
+  function clearStatusClass() {
   }
-  
-  function clearStatusClass(element) {
-    element.classList.remove('correct')
-    element.classList.remove('wrong')
-  }
-// the question and answer that is in the array
+
+function lastPart(){
+    endGame.classList.remove('hide')
+    main.classList.add('hide')
+    header.classList.add('hide')
+    title.classList.add('hide')
+
+}
+
+submit.addEventListener("click", function(){
+    highscoreContainer.classList.remove("hide")
+    endGame.classList.add('hide') 
+})
+
+retryButton.addEventListener("click", function(){
+    window.location.reload();
+});
+
+quitBtn.addEventListener('click', function(){
+    endGame.classList.add('hide')   
+})
+    
+
+var userScore = JSON.stringify(localStorage.getItem('count'))
+finalScore.textContent = userScore;
+console.log(userScore)
+
+
 var questionList = [
 {
     questions: 'These errors occur when the Javascript code is not a syntactically correct.',

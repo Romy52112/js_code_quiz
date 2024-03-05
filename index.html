@@ -7,35 +7,43 @@
     <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-    <header class = "header">
+    <header class = "header" id="head">
         <div id="score">View high scores</div>
         <div class="timer">Time Left: <span id="time">60</span></div>
     </header>
-    <h1>JAVASCRIPT FUNDAMENTALS QUIZ</h1>
-        <div class="first_part" id="invi">Try to answer these 10 questions about Javascript. 
+    <h1 id="title">JAVASCRIPT FUNDAMENTALS QUIZ</h1>
+    <div class="first_part" id="invi">Try to answer these 10 questions about Javascript. 
             <div id="controls">
-                <button id="start_quiz">Start Quiz</button>
+                <button id="start_quiz" class="start">Start Quiz</button></div>
+    </div>
+    <div id="end-game" class="hide">
+        <h2 class="done ">All done!!!</h2>
+        <p id="yourScore">Your Score is <span id="finalScore"></span></p><br>
+            <div id="last-part"> 
+                    <input  id="text" type="text" placeholder="Your Initials"> 
+                    <button id="submit">Submit</button>
+                    
             </div>
-        </div>
-    <main>
+    </div>
+    <div id="highscoreContainer" class="hide">
+        <h3>Highscore</h3>
+            <input  id="text" type="text" placeholder="Your Initials"> 
+            <button id="retry" class="end-btn  ">Retry</button>
+            <button id="quit" class="end-btn  ">Clear Highscore</button>
+
+    </div>
+    <main id="main_container">
         <section id="question_container" class="hide">
-            <div id = "question">This is the question?</div>
+            <div id ="question">This is the question?</div>
             <div id="answer">
                 <button class="btn">Answer 1</button>
-                <button class="btn">Answer 1</button>
-                <button class="btn">Answer 1</button>
-                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
             </div>
             <div id="wrongCorrect"></div>
-        </section>       
-        <div id="end-game">
-            <h2 clas="done ">All done!!!</h2>
-             <div id="last-part">  
-                <button class="end-btn  ">Retry</button>
-                <button id="quit" class="end-btn  ">Quit</button>
-            </div>
-        </div>
-    </main>    
+    </main>
+     
    <script src="./assets/script.js"></script> 
 </body>
 </html>
