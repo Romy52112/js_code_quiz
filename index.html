@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class = "header" id="head">
-        <div id="score">View high scores</div>
+        <a id="score" href="#highScore">View high scores</a>
         <div class="timer">Time Left: <span id="time">60</span></div>
     </header>
     <h1 id="title">JAVASCRIPT FUNDAMENTALS QUIZ</h1>
@@ -26,8 +26,8 @@
             </div>
     </div>
     <div id="highScore" class="hide">
-        <h3>Highscore</h3>
-            <p class="yourName"> <span id="scoreDisplay"></span></p>
+            <h3>List of High Score <span id="list-count"></span></h3>
+            <ol id="list"></ol>
             <button id="retry" class="end-btn  ">Retry</button>
             <button id="quit" class="end-btn  ">Clear Highscore</button>
 

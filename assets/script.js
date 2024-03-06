@@ -112,12 +112,15 @@ function setStatusClass(body, correct) {
   function clearStatusClass() {
   }
 
-  submit.addEventListener("click", function(){
-    highscoreContainer.classList.remove("hide")
-    endGame.classList.add('hide')
-  
-})
-  
+
+
+
+input.addEventListener("keyup", display)
+    function display (){
+    localStorage.setItem('value', input.value)
+}
+
+
 function lastPart(){
     endGame.classList.remove('hide')
     main.classList.add('hide')
@@ -125,17 +128,59 @@ function lastPart(){
     title.classList.add('hide')
     final.textContent = score
     localStorage.setItem('resultScore', score);
-    input.addEventListener("keyup", display)
-    function display (){
-        localStorage.setItem('value', input.value)
-    }
-    result.textContent = localStorage.getItem('value') + localStorage.getItem('resultScore')
+    localStorage.getItem('resultScore');
 }
 
+var list = document.getElementById('list')
+var listCount = document.getElementById('list-count')
+var listOfName = [];
 
 
+function renderList(){
+    list.innerHTML = "";
+    listCount.textContent = listOfName.length;
+
+    for (var i = 0; i < listOfName.length; i++) {
+    var scoreEl = listOfName[i];
+
+    var li = document.createElement("li");
+    li.textContent = scoreEl;
+    li.setAttribute("data-index", i);
+
+    var button = document.createElement("button");
+    button.textContent = score;
+
+    li.appendChild(button);
+    list.appendChild(li);
+    }}
 
 
+function init() {
+    var storedList = JSON.parse(localStorage.getItem("listOfName"));
+    if (storedList !== null) {
+        listOfName = storedList;
+    }
+    renderList();
+  }
+
+  function storedList() {
+    localStorage.setItem("listOfName", JSON.stringify(listOfName));
+  }
+  submit.addEventListener("click", function(event) {
+    event.preventDefault();
+    highscoreContainer.classList.remove("hide")
+    endGame.classList.add('hide')
+    var initialText = input.value.trim();
+    if (initialText === "") {
+      return;
+    }
+    listOfName.push(initialText);
+    input.value = "";
+   
+    storedList();
+    renderList();
+  });
+  init();
 
 retryButton.addEventListener("click", function(){
     window.location.reload();
@@ -143,10 +188,13 @@ retryButton.addEventListener("click", function(){
 
 quitBtn.addEventListener('click', function(){
     endGame.classList.add('hide') 
+    list.classList.add('hide')
+    listCount.textContent = 0
     localStorage.clear('resultScore')
-    result.classList.add('hide') 
-})
     
+})
+
+
 var questionList = [
 {
     questions: 'These errors occur when the Javascript code is not a syntactically correct.',
