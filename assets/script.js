@@ -13,9 +13,12 @@ var wrongCorrect = document.getElementById('wrongCorrect')
 var main = document.getElementById('main_container')
 var title = document.getElementById('title')
 var header = document.getElementById('head')
-var finalScore = document.getElementById('finalScore')
+var final = document.getElementById('final')
 var submit = document.getElementById('submit')
-var highscoreContainer = document.getElementById('highscoreContainer')
+var highscoreContainer = document.getElementById('highScore')
+var result = document.getElementById('scoreDisplay')
+var yourName = document.getElementsByClassName('yourName')
+var input = document.getElementById('text1')
 
 
 
@@ -36,7 +39,7 @@ quizAnswer.addEventListener('click', ()=>{
 
 function startQuiz() {
     score = 0;
-    finalScore.textContent = score
+    final.textContent = score
     first_part.classList.add('hide')
     shuffledQuestions = questionList.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
@@ -91,7 +94,6 @@ function resetQuestion(){
    
 }
 
-
 function setStatusClass(body, correct) {
     clearStatusClass(body)
     if (correct) {
@@ -99,7 +101,6 @@ function setStatusClass(body, correct) {
       body.classList.remove('wrong')
       wrongCorrect.textContent = "YOU'RE CORRECT!!!!"
       score = score +1;
-
       
     } else {
       body.classList.add('wrong')
@@ -111,33 +112,41 @@ function setStatusClass(body, correct) {
   function clearStatusClass() {
   }
 
+  submit.addEventListener("click", function(){
+    highscoreContainer.classList.remove("hide")
+    endGame.classList.add('hide')
+  
+})
+  
 function lastPart(){
     endGame.classList.remove('hide')
     main.classList.add('hide')
     header.classList.add('hide')
     title.classList.add('hide')
-
+    final.textContent = score
+    localStorage.setItem('resultScore', score);
+    input.addEventListener("keyup", display)
+    function display (){
+        localStorage.setItem('value', input.value)
+    }
+    result.textContent = localStorage.getItem('value') + localStorage.getItem('resultScore')
 }
 
-submit.addEventListener("click", function(){
-    highscoreContainer.classList.remove("hide")
-    endGame.classList.add('hide') 
-})
+
+
+
+
 
 retryButton.addEventListener("click", function(){
     window.location.reload();
 });
 
 quitBtn.addEventListener('click', function(){
-    endGame.classList.add('hide')   
+    endGame.classList.add('hide') 
+    localStorage.clear('resultScore')
+    result.classList.add('hide') 
 })
     
-
-var userScore = JSON.stringify(localStorage.getItem('count'))
-finalScore.textContent = userScore;
-console.log(userScore)
-
-
 var questionList = [
 {
     questions: 'These errors occur when the Javascript code is not a syntactically correct.',

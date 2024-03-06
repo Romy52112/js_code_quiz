@@ -40,14 +40,21 @@ h1 {
     padding: 20px;
     
 }
-#invi, #yourScore, #highscoreContainer{
+#invi, #highScore{
     text-align: center;
     font-size: 30px;
     font-weight: bold;
     padding: 20px;
     margin-top: 20px;
 }
-#text, #submit{
+.yourScore, #final{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 20px;
+    margin-top: 20px;
+}
+#content, #submit{
     border-radius: 5px;
     cursor: pointer;
     margin: 10px;
@@ -55,6 +62,11 @@ h1 {
     padding: 20px;
     
 
+}
+.yourName{
+    border: solid black 2px;
+    border-radius: 5px;
+    margin: 20px;
 }
 #question{
     font-size: 30px;
