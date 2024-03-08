@@ -9,29 +9,32 @@
 <body>
     <header class = "header" id="head">
         <a id="score" href="#highScore">View high scores</a>
-        <div class="timer">Time Left: <span id="time">60</span></div>
+        <div class="timer">Time Left: <span id="time">200</span></div>
     </header>
     <h1 id="title">JAVASCRIPT FUNDAMENTALS QUIZ</h1>
-    <div class="first_part" id="invi">Try to answer these 10 questions about Javascript. 
+    <section class="first_part" id="invi">Try to answer these 6 questions about Javascript. 
             <div id="controls">
-                <button id="start_quiz" class="start">Start Quiz</button></div>
-    </div>
+                <button id="start_quiz" class="start">Start Quiz</button>
+            </div>
+    </section>
     <div id="end-game" class="hide">
         <h2 class="done ">All done!!!</h2>
         <p class="yourScore">Your Score is <span id="final"></span></p><br>
             <div id="last-part"> 
-                    <input  id="text1" type="text" placeholder="Your Initials"> 
-                    <button id="submit">Submit</button>
+                <input  id="text1" type="text" placeholder="Your Initials"> 
+                <button id="submit">Submit</button>
                     
             </div>
     </div>
-    <div id="highScore" class="hide">
+    <section id="highScore" class="hide">
             <h3>List of High Score <span id="list-count"></span></h3>
-            <ol id="list"></ol>
+            <div>
+                <ul id="list"></ul>
+            </div>
             <button id="retry" class="end-btn  ">Retry</button>
-            <button id="quit" class="end-btn  ">Clear Highscore</button>
+            <button id="quit" class="end-btn  ">Clear</button>
 
-    </div>
+    </section>
     <main id="main_container">
         <section id="question_container" class="hide">
             <div id ="question">This is the question?</div>
@@ -46,4 +49,8 @@
      
    <script src="./assets/script.js"></script> 
 </body>
+<footer id="footer">
+    <h4 id="specialChar">Romy Pisigan</h4>
+    <p>Copyright @ 2024</p>
+</footer>
 </html>

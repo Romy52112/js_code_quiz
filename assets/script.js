@@ -1,3 +1,4 @@
+// set of var 
 var questionSet = document.getElementById('question_container');
 var startButton = document.getElementById("start_quiz");
 var quizQuestion = document.getElementById('question');
@@ -19,6 +20,7 @@ var highscoreContainer = document.getElementById('highScore')
 var result = document.getElementById('scoreDisplay')
 var yourName = document.getElementsByClassName('yourName')
 var input = document.getElementById('text1')
+var viewScore = document.getElementById('score')
 
 
 
@@ -36,20 +38,20 @@ quizAnswer.addEventListener('click', ()=>{
     nextQuestion()
 
  })
-
+// this is the fumction to start answering the question
 function startQuiz() {
     score = 0;
     final.textContent = score
     first_part.classList.add('hide')
     shuffledQuestions = questionList.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
-    timeRemaining = 10;
+    timeRemaining = 200;
     questionSet.classList.remove('hide')
     nextQuestion(); 
     var interval = setInterval(function(){
     timeRemaining--;
     timeLeft.textContent = timeRemaining;
-    if(timeRemaining === 0){
+    if(timeRemaining <= 0){
     clearInterval(interval)
     lastPart()
     }}, 1000);
@@ -58,6 +60,9 @@ function startQuiz() {
 
 // this is to show the question after clicking the start button.
  function nextQuestion(){
+    if(currentQuestionIndex===questionList.length-1){
+        lastPart()
+    }
     resetQuestion()
     showQuestion(shuffledQuestions[currentQuestionIndex])
  }
@@ -93,7 +98,8 @@ function resetQuestion(){
     }
    
 }
-
+// it will say if your answer is correct or wrong
+// will count your correct answer
 function setStatusClass(body, correct) {
     clearStatusClass(body)
     if (correct) {
@@ -111,16 +117,12 @@ function setStatusClass(body, correct) {
   } 
   function clearStatusClass() {
   }
-
-
-
-
+//  User has to input his Initials 
 input.addEventListener("keyup", display)
     function display (){
     localStorage.setItem('value', input.value)
 }
-
-
+// this is the last part where the user see his initial and score
 function lastPart(){
     endGame.classList.remove('hide')
     main.classList.add('hide')
@@ -131,6 +133,7 @@ function lastPart(){
     localStorage.getItem('resultScore');
 }
 
+// this is for the local storage
 var list = document.getElementById('list')
 var listCount = document.getElementById('list-count')
 var listOfName = [];
@@ -140,15 +143,15 @@ function renderList(){
     list.innerHTML = "";
     listCount.textContent = listOfName.length;
 
-    for (var i = 0; i < listOfName.length; i++) {
-    var scoreEl = listOfName[i];
+    for (var i = listOfName.length-1; i >=0; i--) {
+    var scoreObj = listOfName[i];
 
     var li = document.createElement("li");
-    li.textContent = scoreEl;
+    li.textContent = scoreObj.initials + '    ';
     li.setAttribute("data-index", i);
 
     var button = document.createElement("button");
-    button.textContent = score;
+    button.textContent = scoreObj.score +' ' + "points";
 
     li.appendChild(button);
     list.appendChild(li);
@@ -166,33 +169,47 @@ function init() {
   function storedList() {
     localStorage.setItem("listOfName", JSON.stringify(listOfName));
   }
+//   the time you submit your initial
   submit.addEventListener("click", function(event) {
     event.preventDefault();
     highscoreContainer.classList.remove("hide")
     endGame.classList.add('hide')
-    var initialText = input.value.trim();
+    var initialText = input.value;
+    var scoreObj = {
+        initials: initialText,
+        score: score,
+    }
     if (initialText === "") {
       return;
     }
-    listOfName.push(initialText);
+    var savedScores = JSON.parse(localStorage.getItem('scores'))
+    if(!savedScores){
+        savedScores = [];
+    }
+    listOfName = savedScores
+    listOfName.push(scoreObj);
     input.value = "";
-   
-    storedList();
+    localStorage.setItem("scores", JSON.stringify(listOfName))
     renderList();
   });
-  init();
 
+
+  init();
+// button to retry play again
 retryButton.addEventListener("click", function(){
     window.location.reload();
 });
-
+//where you will quit or clear the local storage and to clear the history
 quitBtn.addEventListener('click', function(){
     endGame.classList.add('hide') 
     list.classList.add('hide')
     listCount.textContent = 0
-    localStorage.clear('resultScore')
+    localStorage.clear()
     
 })
+
+
+
 
 
 var questionList = [
